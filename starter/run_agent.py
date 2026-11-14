@@ -34,9 +34,11 @@ def main():
     parser.add_argument('--max-searches', type=int, default=4)
     parser.add_argument('--top-k', type=int, default=3)
     parser.add_argument('--budget', type=int, default=800)
+    parser.add_argument('--rrf-k', type=int, default=60, help='Hybrid RRF constant (positive)')
+    parser.add_argument('--candidate-k', type=int, default=10, help='Hybrid candidates per method (positive; at least top-k at runtime)')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    if min(args.max_searches, args.top_k, args.budget) < 1:
+    if min(args.max_searches, args.top_k, args.budget, args.rrf_k, args.candidate_k) < 1:
         parser.error('Limits must be positive')
     if args.cases and not args.split:
         parser.error('--cases requires --split')
@@ -70,7 +72,7 @@ def main():
                         raise ValueError('No strategy A chunks')
                     if args.retriever == 'hybrid':
                         from hybrid_retriever import HybridRetriever
-                        retriever = HybridRetriever(chunks, dense)
+                        retriever = HybridRetriever(chunks, dense, rrf_k=args.rrf_k, candidate_k=args.candidate_k)
                     else:
                         retriever = dense
             controller = GeminiController(args.model, args.max_searches)
@@ -89,6 +91,8 @@ def main():
             context_policy='cumulative, deduplicated, newest search first, first-fit', agent_version='citation-repair-v2',
             model_calls=controller.calls if controller else [],
             elapsed_ms=(time.perf_counter()-started)*1000, service_cost_usd=None)
+        if args.retriever == 'hybrid':
+            result.update(rrf_k=args.rrf_k, candidate_k=max(args.top_k, args.candidate_k))
         annotate([result], {'retriever': args.retriever})
         traces.append(result)
         (args.output / 'traces.json').write_text(json.dumps(traces, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -99,6 +103,8 @@ def main():
         abstain=sum(t['status']=='abstain' for t in traces),
         errors=sum(t['status']=='error' for t in traces), service_cost_usd=None,
         note='Operational counts only. Human review required for grounding/citations/abstention correctness.')
+    if args.retriever == 'hybrid':
+        summary.update(rrf_k=args.rrf_k, candidate_k=max(args.top_k, args.candidate_k))
     annotate(traces, summary)
     (args.output / 'summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     if summary['errors']:
@@ -107,5 +113,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 

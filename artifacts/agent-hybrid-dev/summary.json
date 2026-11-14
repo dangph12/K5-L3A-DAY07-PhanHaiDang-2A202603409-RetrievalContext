@@ -1,0 +1,10 @@
+{
+    "model":  "gemini-3.5-flash-lite",
+    "retriever":  "hybrid",
+    "cases":  17,
+    "answered":  14,
+    "abstain":  2,
+    "errors":  1,
+    "service_cost_usd":  0.0118315,
+    "note":  "Operational counts only. Human review required for grounding/citations/abstention correctness."
+}

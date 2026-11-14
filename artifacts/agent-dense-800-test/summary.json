@@ -1,0 +1,10 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "retriever": "dense",
+  "cases": 7,
+  "answered": 5,
+  "abstain": 2,
+  "errors": 0,
+  "service_cost_usd": 0.0049762,
+  "note": "Operational counts only. Human review required for grounding/citations/abstention correctness."
+}

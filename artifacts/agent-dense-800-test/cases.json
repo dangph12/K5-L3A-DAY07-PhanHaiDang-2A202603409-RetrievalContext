@@ -1,0 +1,97 @@
+[
+    {
+        "id":  "q16",
+        "split":  "test",
+        "question":  "What does floor division (//) compute?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  59,
+                         "evidence":  "Floor division (//) computes the quotient, or the number of times divided."
+                     }
+                 ],
+        "expected_answer":  "It computes the quotient, or the number of times one number is divided by another.",
+        "filter":  {
+                       "chapter":  "Expressions"
+                   },
+        "answerable":  true
+    },
+    {
+        "id":  "q17",
+        "split":  "test",
+        "question":  "What does the modulo operator (%) compute?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  59,
+                         "evidence":  "The modulo operator (%) computes the remainder."
+                     }
+                 ],
+        "expected_answer":  "It computes the remainder.",
+        "filter":  {
+                       "chapter":  "Expressions"
+                   },
+        "answerable":  true
+    },
+    {
+        "id":  "q18",
+        "split":  "test",
+        "question":  "What causes a round-off error?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  56,
+                         "evidence":  "A round-off error occurs when floating-point values are stored erroneously as an approximation."
+                     }
+                 ],
+        "expected_answer":  "It occurs when floating-point values are stored erroneously as an approximation.",
+        "answerable":  true
+    },
+    {
+        "id":  "q19",
+        "split":  "test",
+        "question":  "What is the purpose of comments in a program?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  37,
+                         "evidence":  "Comments are short phrases that explain what the code is doing."
+                     }
+                 ],
+        "expected_answer":  "They explain what the code is doing.",
+        "filter":  {
+                       "chapter":  "Statements"
+                   },
+        "answerable":  true
+    },
+    {
+        "id":  "q20",
+        "split":  "test",
+        "question":  "What does Python do with adjacent string literals?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  69,
+                         "evidence":  "For convenience, Python automatically concatenates multiple strings."
+                     }
+                 ],
+        "expected_answer":  "It automatically concatenates them.",
+        "answerable":  true
+    },
+    {
+        "id":  "q23",
+        "split":  "test",
+        "question":  "How can one Python class inherit methods from another class?",
+        "answerable":  false,
+        "expected_behavior":  "search_and_abstain",
+        "absence_reason":  "The corpus does not discuss classes or inheritance."
+    },
+    {
+        "id":  "q24",
+        "split":  "test",
+        "question":  "How can a Python program query a database using SQL?",
+        "answerable":  false,
+        "expected_behavior":  "search_and_abstain",
+        "absence_reason":  "The corpus does not discuss databases or SQL."
+    }
+]

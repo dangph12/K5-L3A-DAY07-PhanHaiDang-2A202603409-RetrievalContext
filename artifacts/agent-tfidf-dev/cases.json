@@ -1,0 +1,228 @@
+[
+    {
+        "id":  "q01",
+        "split":  "dev",
+        "question":  "How does a Python program run its statements?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  17,
+                         "evidence":  "Programs consist of statements to be run one after the other."
+                     }
+                 ],
+        "expected_answer":  "It runs statements one after another.",
+        "answerable":  true
+    },
+    {
+        "id":  "q02",
+        "split":  "dev",
+        "question":  "What does the statement count = 0 do?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  17,
+                         "evidence":  "The statement count = 0 instructs Python to assign the integer 0 to the variable count."
+                     }
+                 ],
+        "expected_answer":  "It assigns the integer 0 to the variable count.",
+        "answerable":  true
+    },
+    {
+        "id":  "q03",
+        "split":  "dev",
+        "question":  "Which built-in function displays output to the user?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  20,
+                         "evidence":  "The print() function displays output to the user."
+                     }
+                 ],
+        "expected_answer":  "The print() function displays output to the user.",
+        "answerable":  true
+    },
+    {
+        "id":  "q04",
+        "split":  "dev",
+        "question":  "What does print() add at the end of its output by default?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  21,
+                         "evidence":  "By default, the print() function adds a newline character at the end of the output."
+                     }
+                 ],
+        "expected_answer":  "It adds a newline character at the end of the output.",
+        "answerable":  true
+    },
+    {
+        "id":  "q05",
+        "split":  "dev",
+        "question":  "What does the input() function read from the user?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  22,
+                         "evidence":  "The input() function reads one line of input from the user."
+                     }
+                 ],
+        "expected_answer":  "It reads one line of input from the user.",
+        "answerable":  true
+    },
+    {
+        "id":  "q06",
+        "split":  "dev",
+        "question":  "Which operator assigns a value to a variable in a statement?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  24,
+                         "evidence":  "using the assignment operator (=)."
+                     }
+                 ],
+        "expected_answer":  "The assignment operator (=).",
+        "answerable":  true
+    },
+    {
+        "id":  "q07",
+        "split":  "dev",
+        "question":  "What are Python\u0027s reserved words called?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  25,
+                         "evidence":  "Python has reserved words, known as keywords"
+                     }
+                 ],
+        "expected_answer":  "They are called keywords.",
+        "answerable":  true
+    },
+    {
+        "id":  "q08",
+        "split":  "dev",
+        "question":  "What does concatenation do to two or more strings?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  28,
+                         "evidence":  "Concatenation is an operation that combines two or more strings sequentially with the concatenation operator"
+                     }
+                 ],
+        "expected_answer":  "It combines them sequentially into one string.",
+        "answerable":  true
+    },
+    {
+        "id":  "q09",
+        "split":  "dev",
+        "question":  "Which two basic number formats does Python support?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  30,
+                         "evidence":  "Python supports two basic number formats, integer and floating-point."
+                     }
+                 ],
+        "expected_answer":  "Integer and floating-point.",
+        "answerable":  true
+    },
+    {
+        "id":  "q10",
+        "split":  "dev",
+        "question":  "When a calculation has multiple operators, how is evaluation ordered?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  31,
+                         "evidence":  "When a calculation has multiple operators, each operator is evaluated in order of precedence."
+                     }
+                 ],
+        "expected_answer":  "Each operator is evaluated in order of precedence.",
+        "answerable":  true
+    },
+    {
+        "id":  "q11",
+        "split":  "dev",
+        "question":  "Which character begins a Python comment?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  37,
+                         "evidence":  "Each comment begins with a hash character (#)."
+                     }
+                 ],
+        "expected_answer":  "A hash character (#).",
+        "answerable":  true
+    },
+    {
+        "id":  "q12",
+        "split":  "dev",
+        "question":  "What does an expression represent?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  47,
+                         "evidence":  "An expression represents a single value to be computed."
+                     }
+                 ],
+        "expected_answer":  "A single value to be computed.",
+        "answerable":  true
+    },
+    {
+        "id":  "q13",
+        "split":  "dev",
+        "question":  "What are expressions often combinations of?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  47,
+                         "evidence":  "Expressions are often a combination of literals, variables, and operators."
+                     }
+                 ],
+        "expected_answer":  "Literals, variables, and operators.",
+        "answerable":  true
+    },
+    {
+        "id":  "q14",
+        "split":  "dev",
+        "question":  "Why is a Python shell useful?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  48,
+                         "evidence":  "Most development environments include a Python shell for experimenting with code interactively."
+                     }
+                 ],
+        "expected_answer":  "It lets a programmer experiment with code interactively.",
+        "answerable":  true
+    },
+    {
+        "id":  "q15",
+        "split":  "dev",
+        "question":  "What does implicit type conversion do?",
+        "gold":  [
+                     {
+                         "source_id":  "python_book",
+                         "page":  50,
+                         "evidence":  "Python interpreter uses implicit type conversion to automatically convert one data type to another."
+                     }
+                 ],
+        "expected_answer":  "It automatically converts one data type to another.",
+        "answerable":  true
+    },
+    {
+        "id":  "q21",
+        "split":  "dev",
+        "question":  "How do you define a recursive function in Python?",
+        "answerable":  false,
+        "expected_behavior":  "search_and_abstain",
+        "absence_reason":  "The corpus does not discuss recursion or recursive functions."
+    },
+    {
+        "id":  "q22",
+        "split":  "dev",
+        "question":  "How do you use a pandas DataFrame to select rows by a condition?",
+        "answerable":  false,
+        "expected_behavior":  "search_and_abstain",
+        "absence_reason":  "The corpus mentions pandas on page 19 but gives no DataFrame row-selection instructions."
+    }
+]

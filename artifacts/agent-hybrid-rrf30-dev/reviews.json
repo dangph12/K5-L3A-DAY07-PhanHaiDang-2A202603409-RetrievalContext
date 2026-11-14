@@ -1,0 +1,149 @@
+[
+    {
+        "query_id": "q01",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation contains the exact statement about statements running one after the other.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q02",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation contains the exact count = 0 assignment statement.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q03",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation contains the exact print() definition.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q04",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation contains the exact default-newline statement.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q05",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation states input() reads one line of input from the user.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q06",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation states variables are set using the assignment operator (=).",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q07",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation states reserved words are known as keywords.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q08",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation gives the concatenation definition and operator.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q09",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation names the two basic number formats.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q10",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation gives the operator-precedence rule.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q11",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation states each comment begins with a hash character.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q12",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation states an expression represents a single value to be computed.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q13",
+        "citation_support": [
+            true
+        ],
+        "reason": "Citation lists literals, variables, and operators.",
+        "answer_grade": 2,
+        "context_grade": 2
+    },
+    {
+        "query_id": "q14",
+        "citation_support": [
+            true
+        ],
+        "reason": "Answer mentions running one line at a time but omits interactive experimentation; citation supports only the partial claim.",
+        "answer_grade": 1,
+        "context_grade": 1
+    },
+    {
+        "query_id": "q15",
+        "citation_support": [
+            true
+        ],
+        "reason": "Answer describes when conversion happens but omits automatic conversion between data types; citation supports only the partial claim.",
+        "answer_grade": 1,
+        "context_grade": 1
+    },
+    {
+        "query_id": "q21",
+        "citation_support": [],
+        "reason": "Abstained; retrieved pages discuss comments and round(), not recursion.",
+        "abstention_correct": true
+    },
+    {
+        "query_id": "q22",
+        "citation_support": [],
+        "reason": "Abstained; page 19 mentions pandas but not DataFrame row selection.",
+        "abstention_correct": true
+    }
+]
