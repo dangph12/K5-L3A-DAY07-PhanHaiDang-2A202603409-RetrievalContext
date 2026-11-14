@@ -1,0 +1,20 @@
+{
+  "strategy": "hybrid",
+  "split": "dev",
+  "n": 15,
+  "hit1": 13,
+  "hit3": 15,
+  "context_hit": 13,
+  "avg_context_chars": 622.2,
+  "median_ms": 411.0906999994768,
+  "index_seconds": 0.022380400000656664,
+  "service_cost_usd": null,
+  "embedding_model": "gemini-embedding-001",
+  "dimensions": 768,
+  "database_strategy": "A",
+  "filters_applied": false,
+  "candidate_k": 10,
+  "rrf_k": 60,
+  "timing_note": "Index time is lexical index creation only; retrieval includes Gemini API, lexical search, database connection/search, fusion and context packing.",
+  "cost_note": "Gemini API cost not measured; consult provider billing."
+}

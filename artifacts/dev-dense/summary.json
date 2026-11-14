@@ -1,0 +1,18 @@
+{
+  "strategy": "dense",
+  "split": "dev",
+  "n": 15,
+  "hit1": 10,
+  "hit3": 15,
+  "context_hit": 10,
+  "avg_context_chars": 600.0666666666667,
+  "median_ms": 414.3053999996482,
+  "index_seconds": null,
+  "service_cost_usd": null,
+  "embedding_model": "gemini-embedding-001",
+  "dimensions": 768,
+  "database_strategy": "A",
+  "filters_applied": false,
+  "timing_note": "Includes query embedding API, database connection/search and context packing; existing document index reused.",
+  "cost_note": "Gemini API cost not measured; consult provider billing."
+}
