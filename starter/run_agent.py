@@ -6,6 +6,7 @@ import time
 from pathlib import Path
 from dotenv import load_dotenv
 from agentic import run_agent
+from costs import annotate
 from baseline import TfidfIndex
 from gemini_controller import GeminiController
 
@@ -76,7 +77,7 @@ def main():
             # Only question text enters the agent: never gold, answerable or absence_reason.
             result = run_agent(case['question'], controller, retriever,
                 max_searches=args.max_searches, top_k=args.top_k, budget=args.budget,
-                event_log=events)
+                event_log=events, newest_first=True)
         except Exception as exc:
             result = dict(status='error', answer='', citations=[], events=events,
                           error_type=type(exc).__name__)
@@ -85,9 +86,10 @@ def main():
         result.update(query_id=case['id'], question=case['question'], split=case.get('split'),
             retriever=args.retriever, model=args.model, database_strategy='A',
             max_searches=args.max_searches, top_k=args.top_k, budget_chars=args.budget,
-            context_policy='cumulative, deduplicated, first-fit in retrieval order',
+            context_policy='cumulative, deduplicated, newest search first, first-fit', agent_version='citation-repair-v2',
             model_calls=controller.calls if controller else [],
             elapsed_ms=(time.perf_counter()-started)*1000, service_cost_usd=None)
+        annotate([result], {'retriever': args.retriever})
         traces.append(result)
         (args.output / 'traces.json').write_text(json.dumps(traces, ensure_ascii=False, indent=2), encoding='utf-8')
         print(json.dumps(dict(query_id=case['id'], status=result['status'], answer=result['answer'],
@@ -97,6 +99,7 @@ def main():
         abstain=sum(t['status']=='abstain' for t in traces),
         errors=sum(t['status']=='error' for t in traces), service_cost_usd=None,
         note='Operational counts only. Human review required for grounding/citations/abstention correctness.')
+    annotate(traces, summary)
     (args.output / 'summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     if summary['errors']:
         raise SystemExit(1)
@@ -104,3 +107,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+

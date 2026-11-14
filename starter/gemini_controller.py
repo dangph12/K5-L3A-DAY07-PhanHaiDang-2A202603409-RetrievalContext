@@ -14,6 +14,12 @@ from context and list those IDs in citations. Never invent IDs or evidence. If e
 insufficient, abstain with a short explanation, without speculative factual claims.
 Only the provided context is available as evidence. Match the user's language.
 '''
+SYSTEM += '''
+First search: use the original question verbatim. Later searches must not repeat queries.
+When searches_remaining is zero, answer or abstain; never search.
+Citations must appear INSIDE answer as [exact-chunk-id] as well as in citations.
+Example: {"action":"answer","answer":"Seven days [c1].","citations":["c1"]}
+'''
 SCHEMA = {'type': 'OBJECT', 'properties': {
     'action': {'type': 'STRING', 'enum': ['search', 'answer', 'abstain']},
     'query': {'type': 'STRING'}, 'answer': {'type': 'STRING'},
@@ -28,10 +34,7 @@ class GeminiController:
         self.calls = []
         self.client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
 
-    def decide(self, question, history):
-        used = len(history[0]['queries']) if history else 0
-        payload = dict(question=question, tool_state=history,
-                       searches_remaining=max(0, self.max_searches-used))
+    def _request(self, payload):
         started = time.perf_counter()
         record = {'input': payload, 'model': self.model}
         self.calls.append(record)
@@ -53,3 +56,34 @@ class GeminiController:
             raise
         finally:
             record['elapsed_ms'] = (time.perf_counter()-started)*1000
+
+    def decide(self, question, history):
+        used = len(history[0]['queries']) if history else 0
+        payload = dict(question=question, tool_state=history,
+                       searches_remaining=max(0, self.max_searches-used))
+        allowed = set(history[0]['context_ids']) if history else set()
+        for attempt in range(2):
+            action = self._request(payload)
+            kind = action['action']
+            issue = None
+            if not history and (kind != 'search' or action.get('query') != question):
+                issue = 'First action must be search with the original question verbatim.'
+            elif kind == 'search':
+                previous = history[0]['queries'] if history else []
+                if used >= self.max_searches:
+                    issue = 'No searches remain. Answer from context or abstain.'
+                elif not isinstance(action.get('query'), str) or not action['query'].strip():
+                    issue = 'Provide a nonempty search query.'
+                elif action['query'].strip().casefold() in [q.strip().casefold() for q in previous]:
+                    issue = 'Query already searched. Use a different query or finish.'
+            elif kind == 'answer':
+                answer, citations = action.get('answer'), action.get('citations')
+                if (not isinstance(answer, str) or not answer.strip()
+                    or not isinstance(citations, list) or not citations
+                    or any(not isinstance(cid, str) or cid not in allowed or f'[{cid}]' not in answer for cid in citations)):
+                    issue = 'Repair citations: each ID must be from context_ids and appear as [exact-id] inside answer. Cite only supporting evidence; otherwise abstain.'
+            if issue is None:
+                return action
+            self.calls[-1]['validation_error'] = issue
+            payload = {**payload, 'previous_invalid_action': action, 'validation_feedback': issue}
+        raise ValueError('Controller failed action validation after one repair')

@@ -1,8 +1,9 @@
-"""Example agent loop; connect a real model and the Day 6 retriever via adapters.
+﻿"""Example agent loop; connect a real model and the Day 6 retriever via adapters.
 
 Adapters are intentionally not provided: Day 6 has no fixed database schema and
 model providers differ. Never use fake adapters to report benchmark quality.
 """
+import time
 from typing import Any, Protocol
 from baseline import pack_context
 
@@ -30,7 +31,7 @@ class Retriever(Protocol):
 
 def run_agent(question: str, controller: Controller, retriever: Retriever, *,
               filters: dict[str, Any] | None = None, max_searches: int = 4,
-              top_k: int = 3, budget: int = 800) -> dict[str, Any]:
+              top_k: int = 3, budget: int = 800, event_log: list | None = None, newest_first: bool = False) -> dict[str, Any]:
     """Return answer, citation IDs and trace; no benchmark gold enters this loop.
 
     A final answer without valid citations, an empty context, and a search limit
@@ -42,7 +43,7 @@ def run_agent(question: str, controller: Controller, retriever: Retriever, *,
     history: list[dict[str, Any]] = []
     chunks: dict[str, dict[str, Any]] = {}
     candidates: list[dict[str, Any]] = []
-    events: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = event_log if event_log is not None else []
     for _ in range(max_searches + 1):
         action = controller.decide(question, history)
         if action.get('action') == 'search':
@@ -51,17 +52,25 @@ def run_agent(question: str, controller: Controller, retriever: Retriever, *,
             query = action.get('query')
             if not isinstance(query, str) or not query.strip():
                 raise ValueError('search query phải là chuỗi không rỗng')
-            results = retriever.search(query, filters=filters, top_k=top_k)
+            started = time.perf_counter()
+            try:
+                results = retriever.search(query, filters=filters, top_k=top_k)
+            except Exception as exc:
+                events.append({'event': 'search_error', 'query': query, 'top_k': top_k, 'error_type': type(exc).__name__})
+                raise
+            elapsed_ms = (time.perf_counter() - started) * 1000
             if len(results) > top_k or len({r['id'] for r in results}) != len(results):
                 raise ValueError('retriever phải trả tối đa top_k chunk ID duy nhất')
-            candidates.extend(results)
+            candidates = results + candidates if newest_first else candidates + results
             context, ids = pack_context(candidates, budget=budget)
             chunks = {c['id']: c for c in candidates if c['id'] in ids}
             events.append({'event': 'search', 'query': query, 'filter': filters, 'results': results,
-                           'context': context, 'context_ids': ids})
+                           'context': context, 'context_ids': ids, 'top_k': top_k, 'budget_chars': budget, 'elapsed_ms': elapsed_ms})
             # Send only the latest cumulative context; avoid multiplying the budget.
             history = [{'tool': 'search', 'queries': [e['query'] for e in events if e['event'] == 'search'],
                         'context': context, 'context_ids': ids}]
+        elif action.get('action') == 'abstain':
+            return {'status': 'abstain', 'answer': 'Không đủ bằng chứng trong tài liệu để trả lời.', 'citations': [], 'events': events + [{'event': 'abstain', 'reason': action.get('answer', '')}]}
         elif action.get('action') == 'answer':
             answer, citations = action.get('answer'), action.get('citations')
             if not isinstance(answer, str) or not isinstance(citations, list) or any(not isinstance(i, str) for i in citations):
@@ -73,3 +82,5 @@ def run_agent(question: str, controller: Controller, retriever: Retriever, *,
         else:
             raise ValueError('action phải là search hoặc answer')
     return {'status': 'abstain', 'answer': 'Không đủ bằng chứng để trả lời.', 'citations': [], 'events': events}
+
+
