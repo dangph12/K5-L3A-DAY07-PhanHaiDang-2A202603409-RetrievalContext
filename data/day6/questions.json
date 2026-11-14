@@ -1,0 +1,271 @@
+[
+  {
+    "id": "q01",
+    "split": "dev",
+    "question": "How does a Python program run its statements?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 17,
+        "evidence": "Programs consist of statements to be run one after the other."
+      }
+    ],
+    "expected_answer": "It runs statements one after another."
+  },
+  {
+    "id": "q02",
+    "split": "dev",
+    "question": "What does the statement count = 0 do?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 17,
+        "evidence": "The statement count = 0 instructs Python to assign the integer 0 to the variable count."
+      }
+    ],
+    "expected_answer": "It assigns the integer 0 to the variable count."
+  },
+  {
+    "id": "q03",
+    "split": "dev",
+    "question": "Which built-in function displays output to the user?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 20,
+        "evidence": "The print() function displays output to the user."
+      }
+    ],
+    "expected_answer": "The print() function displays output to the user."
+  },
+  {
+    "id": "q04",
+    "split": "dev",
+    "question": "What does print() add at the end of its output by default?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 21,
+        "evidence": "By default, the print() function adds a newline character at the end of the output."
+      }
+    ],
+    "expected_answer": "It adds a newline character at the end of the output."
+  },
+  {
+    "id": "q05",
+    "split": "dev",
+    "question": "What does the input() function read from the user?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 22,
+        "evidence": "The input() function reads one line of input from the user."
+      }
+    ],
+    "expected_answer": "It reads one line of input from the user."
+  },
+  {
+    "id": "q06",
+    "split": "dev",
+    "question": "Which operator assigns a value to a variable in a statement?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 24,
+        "evidence": "A statement can set a variable to a value using the assignment operator (=)."
+      }
+    ],
+    "expected_answer": "The assignment operator (=)."
+  },
+  {
+    "id": "q07",
+    "split": "dev",
+    "question": "What are Python's reserved words called?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 25,
+        "evidence": "Python has reserved words, known as keywords"
+      }
+    ],
+    "expected_answer": "They are called keywords."
+  },
+  {
+    "id": "q08",
+    "split": "dev",
+    "question": "What does concatenation do to two or more strings?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 28,
+        "evidence": "Concatenation is an operation that combines two or more strings sequentially with the concatenation operator"
+      }
+    ],
+    "expected_answer": "It combines them sequentially into one string."
+  },
+  {
+    "id": "q09",
+    "split": "dev",
+    "question": "Which two basic number formats does Python support?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 30,
+        "evidence": "Python supports two basic number formats, integer and floating-point."
+      }
+    ],
+    "expected_answer": "Integer and floating-point."
+  },
+  {
+    "id": "q10",
+    "split": "dev",
+    "question": "When a calculation has multiple operators, how is evaluation ordered?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 31,
+        "evidence": "When a calculation has multiple operators, each operator is evaluated in order of precedence."
+      }
+    ],
+    "expected_answer": "Each operator is evaluated in order of precedence."
+  },
+  {
+    "id": "q11",
+    "split": "dev",
+    "question": "Which character begins a Python comment?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 37,
+        "evidence": "Each comment begins with a hash character (#)."
+      }
+    ],
+    "expected_answer": "A hash character (#)."
+  },
+  {
+    "id": "q12",
+    "split": "dev",
+    "question": "What does an expression represent?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 47,
+        "evidence": "An expression represents a single value to be computed."
+      }
+    ],
+    "expected_answer": "A single value to be computed."
+  },
+  {
+    "id": "q13",
+    "split": "dev",
+    "question": "What are expressions often combinations of?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 47,
+        "evidence": "Expressions are often a combination of literals, variables, and operators."
+      }
+    ],
+    "expected_answer": "Literals, variables, and operators."
+  },
+  {
+    "id": "q14",
+    "split": "dev",
+    "question": "Why is a Python shell useful?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 48,
+        "evidence": "Most development environments include a Python shell for experimenting with code interactively."
+      }
+    ],
+    "expected_answer": "It lets a programmer experiment with code interactively."
+  },
+  {
+    "id": "q15",
+    "split": "dev",
+    "question": "What does implicit type conversion do?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 50,
+        "evidence": "Python interpreter uses implicit type conversion to automatically convert one data type to another."
+      }
+    ],
+    "expected_answer": "It automatically converts one data type to another."
+  },
+  {
+    "id": "q16",
+    "split": "test",
+    "question": "What does floor division (//) compute?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 59,
+        "evidence": "Floor division (//) computes the quotient, or the number of times divided."
+      }
+    ],
+    "expected_answer": "It computes the quotient, or the number of times one number is divided by another.",
+    "filter": {
+      "chapter": "Expressions"
+    }
+  },
+  {
+    "id": "q17",
+    "split": "test",
+    "question": "What does the modulo operator (%) compute?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 59,
+        "evidence": "The modulo operator (%) computes the remainder."
+      }
+    ],
+    "expected_answer": "It computes the remainder.",
+    "filter": {
+      "chapter": "Expressions"
+    }
+  },
+  {
+    "id": "q18",
+    "split": "test",
+    "question": "What causes a round-off error?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 56,
+        "evidence": "A round-off error occurs when floating-point values are stored erroneously as an approximation."
+      }
+    ],
+    "expected_answer": "It occurs when floating-point values are stored erroneously as an approximation."
+  },
+  {
+    "id": "q19",
+    "split": "test",
+    "question": "What is the purpose of comments in a program?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 37,
+        "evidence": "Comments are short phrases that explain what the code is doing."
+      }
+    ],
+    "expected_answer": "They explain what the code is doing.",
+    "filter": {
+      "chapter": "Statements"
+    }
+  },
+  {
+    "id": "q20",
+    "split": "test",
+    "question": "What does Python do with adjacent string literals?",
+    "gold": [
+      {
+        "source_id": "python_book",
+        "page": 69,
+        "evidence": "For convenience, Python automatically concatenates multiple strings."
+      }
+    ],
+    "expected_answer": "It automatically concatenates them."
+  }
+]
